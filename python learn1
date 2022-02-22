@@ -1,0 +1,83 @@
+# txt file 연결 -> menu 관리 프로그램
+menu=[]
+menu_num=1
+def fileRead():
+    f=open("c:\eclipse-workspace\menu.txt","r")
+    for line in f.readlines():
+        print(line)
+        item=line.split(',')
+        dict['name']=item[0]
+        dict['price']=int(item[1])
+        menu.append(dict)
+        print(menu_num,dict['name'],dict['price'])
+        menu_num+=1
+    f.close()
+
+def fileWrite():
+    f=open("c:\eclipse-workspace\menu.txt","w")
+    for dict in menu:
+        f.write(dict['name']+","+str(dict['price'])+"\n")
+    f.close()
+a=input('작업을 선택하시오 (C:추가,U:수정,D:삭제,R:메뉴목록,X:종료)')
+while a!='x':
+    if a=='c':
+        b=input('메뉴명을 입력하시오')
+        c=input('가격을 입력하시오')
+        dict={}
+        dict['name']=b
+        dict['price']=int(c)
+        menu.append(dict)                
+        a=input('작업을 선택하시오 (C:추가,U:수정,D:삭제,R:메뉴목록,X:종료)')
+    if a=='u':
+        n=input('메뉴번호를 입력하시오')
+        n1=int(n) 
+        b=input('메뉴명을 입력하시오')
+        b1=str(b)
+        m=input('가격을 입력하시오')
+        m1=int(m)  
+        menu[n1-1]['name']=b1
+        menu[n1-1]['price']=m1
+        a=input('작업을 선택하시오 (C:추가,U:수정,D:삭제,R:메뉴목록,X:종료)')
+    if a=='d':
+        n=input('삭제할 메뉴 번호를 입력하시오')
+        n1=int(n)
+        del menu[n1-1]
+        a=input('작업을 선택하시오 (C:추가,U:수정,D:삭제,R:메뉴목록,X:종료)')
+    if a=='r':
+        print(menu_num,dict['name'],dict['price'])
+        a=input('작업을 선택하시오 (C:추가,U:수정,D:삭제,R:메뉴목록,X:종료)')
+    if a=='x':
+        print('프로그램 종료')
+        fileWrite()
+        
+#정규표현식
+        import re
+ p=re.compile('[a-z]+')
+ m=p.match('python')
+ print(m)
+<re.Match object; span=(0, 6), match='python'>
+
+ m=p.match('3 python')
+ print(m)
+None
+
+ p=re.compile('[0-9] [a-z]+')
+ m=p.match('3 python')
+ print(m)
+<re.Match object; span=(0, 8), match='3 python'>
+
+ p=re.compile('[0-9]*[a-z]+')
+ m=p.match('3333 python')
+ print(m)
+None
+
+ p=re.compile('[0-9]+[a-z]+')
+ m=p.match('3333 python')
+ print(m)
+None
+
+ p=re.compile('[0-9]{6}[-][1-4][0-9]{6}')
+ m=p.match('970119-1165013')
+ print(m)
+<re.Match object; span=(0, 14), match='970119-1165013'>
+        
